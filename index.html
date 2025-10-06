@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Contactanos por WhatsApp</title>
   <meta name="description" content="Si un número de WhatsApp está temporalmente suspendido, probá con los otros. Tocá el botón para abrir el chat." />
+  <!-- (1) Evita que iOS Safari convierta números a links -->
+  <meta name="format-detection" content="telephone=no">
   <style>
     :root{
       --bg:#0f1115;
@@ -86,7 +88,24 @@
     }
     .number{
       font-size:18px; font-weight:700; letter-spacing:.6px; margin:6px 0 14px;
+      /* (2) Asegura color blanco en la línea del número */
+      color: var(--text);
     }
+
+    /* (3) Por si igual se convierte en enlace tel:, forzamos estilo */
+    .number a,
+    a[href^="tel"]{
+      color: var(--text) !important;
+      text-decoration: none !important;
+    }
+    .number a:visited,
+    .number a:hover,
+    a[href^="tel"]:visited,
+    a[href^="tel"]:hover{
+      color: var(--text) !important;
+      text-decoration: none !important;
+    }
+
     .actions{ display:flex; gap:8px; flex-wrap:wrap }
     .btn{
       appearance:none; border:none; cursor:pointer;
@@ -153,8 +172,6 @@
 
   <script>
     // ========= Configuración =========
-    // Números de ejemplo basados en tu referencia 223-555-4555
-    // (cambié sólo el último dígito para tener 5 distintos).
     const numeros = [
       { etiqueta: "Línea 1", display: "+54 9 223 555-4551", phone: "5492235554551" },
       { etiqueta: "Línea 2", display: "+54 9 223 555-4552", phone: "5492235554552" },
@@ -163,7 +180,6 @@
       { etiqueta: "Línea 5", display: "+54 9 223 555-4555", phone: "5492235554555" },
     ];
 
-    // Mensaje prellenado (se puede sobreescribir con ?msg= en la URL)
     const defaultMsg = "Hola, vengo desde la página de contacto. Quisiera hacer una consulta.";
     const params = new URLSearchParams(location.search);
     const msg = params.get("msg") ? params.get("msg") : defaultMsg;
