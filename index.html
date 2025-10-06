@@ -1,1 +1,256 @@
-<!doctype html><meta charset=utf-8><title>Redirecting…</title><meta http-equiv=refresh content="0;url=https://wa.link/fapkic"><link rel=canonical href="https://wa.link/fapkic"><script>location.replace("https://wa.link/fapkic")</script><noscript><meta http-equiv=refresh content="0;url=https://wa.link/fapkic"></noscript>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contactanos por WhatsApp</title>
+  <meta name="description" content="Si un número de WhatsApp está temporalmente suspendido, probá con los otros. Tocá el botón para abrir el chat." />
+  <style>
+    :root{
+      --bg:#0f1115;
+      --card:#161a22;
+      --text:#e6e6e6;
+      --muted:#97a0b0;
+      --brand:#25d366; /* verde WhatsApp */
+      --brand-ink:#0b4b25;
+      --ring:#2a9157;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(60vw 60vw at 20% -10%, #1c2230 0%, rgba(28,34,48,0) 60%),
+        radial-gradient(60vw 60vw at 120% 10%, #101826 0%, rgba(16,24,38,0) 60%),
+        var(--bg);
+      /* ====== FONDO "Joker Wels" (colocá tu imagen aquí) ======
+         Cuando quieras, reemplazá la línea de abajo por algo como:
+         background-image: url('joker-wels.jpg');
+         background-size: cover;
+         background-position: center;
+         y dejá el resto de gradientes si te gusta la superposición. */
+    }
+    header{
+      padding:32px 20px 12px;
+      text-align:center;
+    }
+    header h1{
+      margin:0 0 8px;
+      font-size: clamp(22px, 4vw, 32px);
+      letter-spacing: .2px;
+    }
+    header p{
+      margin:0 auto;
+      max-width: 780px;
+      color:var(--muted);
+      line-height:1.5;
+      font-size: 15.5px;
+    }
+    .container{
+      max-width: 980px;
+      margin: 20px auto 56px;
+      padding: 0 16px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(1,minmax(0,1fr));
+      gap:14px;
+    }
+    @media (min-width:700px){
+      .grid{grid-template-columns: repeat(2,minmax(0,1fr))}
+    }
+    @media (min-width:1024px){
+      .grid{grid-template-columns: repeat(3,minmax(0,1fr))}
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.0)) , var(--card);
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:14px;
+      padding:16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      transition: transform .18s ease, border-color .18s ease;
+    }
+    .card:hover{ transform: translateY(-2px); border-color: rgba(37,211,102,.35); }
+    .top{
+      display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px;
+    }
+    .label{
+      display:inline-flex; align-items:center; gap:8px;
+      font-weight:600; letter-spacing:.2px; font-size:14px; color:#dfe7ef;
+    }
+    .badge{
+      font-size:11px; color:#b7c3d3; background:#0e131b; border:1px solid rgba(255,255,255,.08);
+      padding:4px 8px; border-radius:999px;
+    }
+    .number{
+      font-size:18px; font-weight:700; letter-spacing:.6px; margin:6px 0 14px;
+    }
+    .actions{ display:flex; gap:8px; flex-wrap:wrap }
+    .btn{
+      appearance:none; border:none; cursor:pointer;
+      display:inline-flex; align-items:center; gap:8px;
+      font-weight:700; font-size:14px; letter-spacing:.2px;
+      padding:12px 14px; border-radius:10px; text-decoration:none;
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+    }
+    .btn:active{ transform: translateY(1px); }
+    .btn-wa{
+      background: var(--brand); color:#083a1e;
+      box-shadow: 0 6px 20px rgba(37,211,102,.25);
+    }
+    .btn-wa:hover{ box-shadow: 0 8px 26px rgba(37,211,102,.32); }
+    .btn-copy{
+      background:#0e131b; color:#dfe7ef; border:1px solid rgba(255,255,255,.08);
+    }
+    .hint{
+      margin:22px 0 0; color:var(--muted); font-size:13.5px; line-height:1.45;
+    }
+    .howto{
+      margin-top:28px; padding:16px; border-radius:12px;
+      border:1px dashed rgba(255,255,255,.10); background: rgba(255,255,255,.02);
+      font-size:14px; color:#cfd7e5;
+    }
+    footer{ text-align:center; color:#94a0b3; font-size:12.5px; padding:26px 12px 40px; }
+    .icon{ width:18px; height:18px; display:inline-block; }
+    .toast{
+      position: fixed; left:50%; transform: translateX(-50%);
+      bottom: 18px; background: #0e131b; color:#e9f1ff;
+      border:1px solid rgba(255,255,255,.10); padding:10px 14px; border-radius:10px;
+      font-size:13.5px; opacity:0; pointer-events:none; transition:opacity .18s ease, bottom .18s ease;
+    }
+    .toast.show{ opacity:1; bottom: 26px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Contactanos por WhatsApp</h1>
+    <p>
+      Si un número aparece suspendido o no abre el chat, probá con otro de la lista.
+      Tocá <strong>“Chatear por WhatsApp”</strong> y listo. También podés <strong>copiar el número</strong> para guardarlo en tu agenda.
+    </p>
+  </header>
+
+  <main class="container">
+    <section class="grid" id="cards"></section>
+
+    <section class="howto" aria-label="Cómo funciona">
+      <strong>¿Cómo funciona?</strong><br>
+      1) Tocá el botón “Chatear por WhatsApp”. Se abrirá la app o WhatsApp Web.<br>
+      2) Si no abre, probá con el siguiente número de la lista.<br>
+      3) También podés copiar el número y escribirnos desde tu agenda.
+    </section>
+
+    <p class="hint">Tip: podés compartir este link con tus clientes. Si un canal se cae, siempre tendrán alternativas acá.</p>
+  </main>
+
+  <footer>
+    Página simple de contingencia para caídas/suspensiones de WhatsApp.
+  </footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">Número copiado</div>
+
+  <script>
+    // ========= Configuración =========
+    // Números de ejemplo basados en tu referencia 223-555-4555
+    // (cambié sólo el último dígito para tener 5 distintos).
+    const numeros = [
+      { etiqueta: "Línea 1", display: "+54 9 223 555-4551", phone: "5492235554551" },
+      { etiqueta: "Línea 2", display: "+54 9 223 555-4552", phone: "5492235554552" },
+      { etiqueta: "Línea 3", display: "+54 9 223 555-4553", phone: "5492235554553" },
+      { etiqueta: "Línea 4", display: "+54 9 223 555-4554", phone: "5492235554554" },
+      { etiqueta: "Línea 5", display: "+54 9 223 555-4555", phone: "5492235554555" },
+    ];
+
+    // Mensaje prellenado (se puede sobreescribir con ?msg= en la URL)
+    const defaultMsg = "Hola, vengo desde la página de contacto. Quisiera hacer una consulta.";
+    const params = new URLSearchParams(location.search);
+    const msg = params.get("msg") ? params.get("msg") : defaultMsg;
+
+    // ========= Render =========
+    const cards = document.getElementById('cards');
+
+    numeros.forEach(({ etiqueta, display, phone }) => {
+      const card = document.createElement('article');
+      card.className = 'card';
+
+      const top = document.createElement('div');
+      top.className = 'top';
+
+      const label = document.createElement('div');
+      label.className = 'label';
+      label.innerHTML = `
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M7 11h10M7 7h10M7 15h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        ${etiqueta}
+      `;
+
+      const badge = document.createElement('span');
+      badge.className = 'badge';
+      badge.textContent = "WhatsApp habilitado";
+
+      top.appendChild(label);
+      top.appendChild(badge);
+
+      const number = document.createElement('div');
+      number.className = 'number';
+      number.textContent = display;
+
+      const actions = document.createElement('div');
+      actions.className = 'actions';
+
+      const waLink = document.createElement('a');
+      waLink.className = 'btn btn-wa';
+      waLink.href = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
+      waLink.target = "_blank";
+      waLink.rel = "noopener";
+      waLink.innerHTML = `
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M20 3H4a1 1 0 0 0-1 1v16l3.5-3.5H20a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1m-7.3 3.3a6.68 6.68 0 0 1 6.67 6.67A6.68 6.68 0 0 1 12.7 19.6a6.6 6.6 0 0 1-3.53-1.04l-.25-.16l-2.63.7l.7-2.55l-.16-.25a6.56 6.56 0 0 1-1.08-3.6a6.68 6.68 0 0 1 6.65-6.67m3.7 9.6c-.2.6-.97 1.1-1.6 1.2c-.42.05-.96.08-2.78-.58c-2.32-.89-3.82-3.1-3.94-3.24c-.12-.15-.94-1.25-.94-2.4c0-1.17.61-1.74.82-1.97c.21-.23.46-.29.61-.29h.45c.14 0 .34-.05.53.4c.2.49.66 1.74.72 1.87c.06.12.09.27 0 .44c-.09.17-.14.28-.28.43c-.14.15-.29.34-.41.45c-.14.15-.29.31-.12.59c.17.29.75 1.23 1.6 1.99c1.1.98 2.02 1.28 2.32 1.43c.29.15.46.12.64-.07c.2-.21.46-.55.72-.88c.2-.29.46-.32.72-.22c.27.09 1.7.8 1.99.94c.29.15.48.22.55.34c.08.13.08.62-.12 1.2z"/>
+        </svg>
+        Chatear por WhatsApp
+      `;
+
+      const copyBtn = document.createElement('button');
+      copyBtn.className = 'btn btn-copy';
+      copyBtn.type = 'button';
+      copyBtn.innerHTML = `
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2m0 16H8V7h11z"/>
+        </svg>
+        Copiar número
+      `;
+
+      copyBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(display.replace(/\s|-/g,''));
+          showToast("Número copiado");
+        } catch {
+          showToast("No se pudo copiar, mantené presionado para seleccionar");
+        }
+      });
+
+      actions.appendChild(waLink);
+      actions.appendChild(copyBtn);
+
+      card.appendChild(top);
+      card.appendChild(number);
+      card.appendChild(actions);
+
+      cards.appendChild(card);
+    });
+
+    // ========= Toast (mensaje flotante) =========
+    const toast = document.getElementById('toast');
+    let toastTimer = null;
+    function showToast(text){
+      toast.textContent = text;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(()=> toast.classList.remove('show'), 1800);
+    }
+  </script>
+</body>
+</html>
