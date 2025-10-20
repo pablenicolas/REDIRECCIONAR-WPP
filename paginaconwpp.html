@@ -7,39 +7,45 @@
   <meta name="format-detection" content="telephone=no">
   <style>
     :root{
-      --cta-size: 84px;         /* tamaño del botón en móviles */
+      --cta-size: 96px;               /* tamaño del botón */
       --cta-shadow: 0 14px 30px rgba(0,0,0,.35);
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans";
       color:#fff;
       background:#000;
     }
+
+    /* ======= HERO CON FONDO ======= */
     .hero{
       position:relative;
       min-height:100dvh;
       display:flex;
-      align-items:flex-end;    /* deja libre el centro para que se luzca la imagen */
+      align-items:flex-end;           /* deja la parte central libre para la imagen */
       justify-content:center;
-      padding:16px 16px calc(var(--cta-size) + 28px);
-      background-image: url("bg.png"); /* <- cambiá la ruta si tu archivo se llama distinto */
-      background-size: cover;
-      background-position: center;
+      padding:16px 16px calc(var(--cta-size) + 32px);
+      background-image:url("promo-1500.png");  /* <-- asegurate que este nombre/ruta coincida */
+      background-size:cover;
+      background-position:center;
       background-repeat:no-repeat;
       isolation:isolate;
     }
-    /* Suaviza lectura en zonas claras de la imagen */
+    /* overlay suave para mejorar contraste sin “apagar” la imagen */
     .hero::before{
       content:"";
       position:absolute; inset:0;
-      background: radial-gradient(120% 60% at 50% 100%, rgba(0,0,0,.75) 0%, rgba(0,0,0,.35) 55%, rgba(0,0,0,.15) 100%);
+      background: radial-gradient(120% 60% at 50% 100%,
+        rgba(0,0,0,.45) 0%,
+        rgba(0,0,0,.25) 55%,
+        rgba(0,0,0,.10) 100%);
       z-index:0;
+      pointer-events:none;
     }
 
-    /* Botón flotante */
+    /* ======= BOTÓN WHATSAPP ======= */
     .wa-fab{
       position:fixed;
       left:50%;
@@ -50,65 +56,118 @@
       border-radius:999px;
       display:grid;
       place-items:center;
-      background:#25D366;
-      box-shadow: var(--cta-shadow);
+      background: radial-gradient(circle at 30% 30%, #2fe676, #25D366 60%, #1ebe5a);
+      box-shadow: var(--cta-shadow), 0 0 0 4px rgba(255,255,255,.22);
       text-decoration:none;
       z-index:10;
       outline:none;
-      transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+      transition: transform .15s ease, filter .15s ease;
       animation: pulse 1.6s ease-in-out infinite;
+      -webkit-tap-highlight-color: transparent;
     }
-    .wa-fab:hover{ transform:translateX(-50%) scale(1.05); filter:brightness(1.05) }
+    .wa-fab:hover{ transform:translateX(-50%) scale(1.05); filter:brightness(1.06) }
     .wa-fab:active{ transform:translateX(-50%) scale(.97) }
+
+    /* Etiqueta arriba del botón */
     .wa-fab .label{
       position:absolute;
       bottom:calc(100% + 10px);
       left:50%;
       transform:translateX(-50%);
-      background:rgba(0,0,0,.72);
-      padding:6px 10px;
-      border-radius:10px;
+      background:#25D366;
+      color:#fff !important;                 /* evita azul de links */
+      padding:8px 12px;
+      border-radius:999px;
+      font-weight:800;
       font-size:13px;
+      letter-spacing:.2px;
+      text-decoration:none !important;
+      box-shadow:0 8px 18px rgba(0,0,0,.25);
+      user-select:none;
       white-space:nowrap;
-      box-shadow:0 8px 18px rgba(0,0,0,.35);
-      backdrop-filter:saturate(140%) blur(2px);
     }
+
+    /* Ícono centrado y proporcional */
+    .wa-icon{ width:58%; height:58%; display:block }
+
     @keyframes pulse{
       0%   { box-shadow:0 0 0 0 rgba(37,211,102,.55) }
-      70%  { box-shadow:0 0 0 22px rgba(37,211,102,0) }
+      70%  { box-shadow:0 0 0 24px rgba(37,211,102,0) }
       100% { box-shadow:0 0 0 0 rgba(37,211,102,0) }
     }
 
-    /* Logo WhatsApp (SVG) se adapta al tamaño del botón */
-    .wa-icon{ width:56%; height:56%; display:block }
+    /* Accesibilidad: si el usuario prefiere menos movimiento, desactivar pulso */
+    @media (prefers-reduced-motion: reduce){
+      .wa-fab{ animation:none }
+      .wa-fab:hover, .wa-fab:active{ transform:translateX(-50%) }
+    }
 
-    /* Desktop tweaks */
-    @media (min-width: 768px){
-      :root{ --cta-size: 96px; }
+    /* Desktop */
+    @media (min-width:768px){
+      :root{ --cta-size: 104px; }
       .hero{ padding-bottom: calc(var(--cta-size) + 36px) }
     }
   </style>
 </head>
 <body>
-  <main class="hero" role="img" aria-label="Con tu primer carga te regalamos 1500 en fichas para jugar">
-    <!-- El contenido principal es la imagen de fondo; el botón está flotando -->
-  </main>
+  <!-- La imagen ya contiene todo el texto de la promo, por eso el main queda vacío -->
+  <main class="hero" role="img" aria-label="Con tu primer carga te regalamos 1500 en fichas para jugar"></main>
 
-  <!-- ENLACE DE WHATSAPP
-       Formato recomendado para Argentina: 549 + código de área + número (sin 0 ni 15)
-       Mensaje precargado: Hola quiero un usuario
-       Si querés usar exactamente 11 7132 8249 sin cambios, reemplazá el phone en el href.
-  -->
-  <a class="wa-fab"
-     href="https://wa.me/5491171328249?text=Hola%20quiero%20un%20usuario"
-     target="_blank" rel="noopener"
+  <!-- BOTÓN / ENLACE A WHATSAPP -->
+  <a id="waBtn"
+     class="wa-fab"
+     href="#"
+     data-phone-intl="5491171328249"     <!-- formato recomendado: 549 + área + número -->
+     data-phone-raw="1171328249"         <!-- por si preferís usarlo tal cual -->
+     data-msg="Hola quiero un usuario"
      aria-label="Chatear por WhatsApp: Hola quiero un usuario">
     <span class="label">¡Escribinos por WhatsApp!</span>
-    <!-- SVG oficial de WhatsApp (licencia de marca de Meta; uso como ícono) -->
-    <svg class="wa-icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-      <path d="M19.11 17.32c-.29-.15-1.7-.84-1.96-.93-.26-.1-.45-.15-.64.15-.19.29-.74.93-.91 1.12-.17.19-.34.22-.63.07-.29-.15-1.22-.45-2.33-1.44-.86-.77-1.44-1.72-1.61-2.01-.17-.29-.02-.45.13-.6.13-.13.29-.34.43-.52.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.52-.07-.15-.64-1.54-.88-2.11-.23-.56-.47-.49-.64-.49h-.55c-.19 0-.5.07-.76.36-.26.29-1.0.98-1.0 2.39 0 1.41 1.02 2.77 1.16 2.96.14.19 2.01 3.07 4.87 4.3.68.29 1.21.46 1.62.59.68.22 1.3.19 1.79.12.55-.08 1.7-.7 1.94-1.38.24-.68.24-1.26.17-1.38-.07-.12-.26-.19-.55-.34z" fill="#fff"/>
-      <path d="M27.1 4.9C24.3 2.09 20.78.62 17.06.62 8.87.62 2.25 7.24 2.25 15.43c0 2.64.69 5.22 2 7.49L2 31.38l8.65-2.2c2.2 1.2 4.7 1.83 7.25 1.83 8.19 0 14.81-6.62 14.81-14.81 0-3.72-1.45-7.25-4.26-10.1zM17.9 28.05c-2.3 0-4.55-.62-6.52-1.81l-.47-.28-5.14 1.31 1.37-5.02-.3-.51c-1.2-1.98-1.83-4.26-1.83-6.59 0-7.06 5.75-12.8 12.8-12.8 3.42 0 6.63 1.33 9.04 3.74 2.41 2.41 3.74 5.62 3.74 9.04 0 7.06-5.75 12.8-12.8 12.8z" fill="#fff"/>
+
+    <!-- SVG centrado (viewBox 0 0 24 24) -->
+    <svg class="wa-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <g>
+        <!-- Borde/burbuja -->
+        <path fill="#ffffff" d="M20.52 3.49A11.86 11.86 0 0 0 12 .15C5.56.15.33 5.38.33 11.82c0 2.07.54 4.06 1.58 5.86L.28 23.85l6.38-1.64a11.66 11.66 0 0 0 5.36 1.31c6.44 0 11.67-5.23 11.67-11.67 0-3.12-1.21-6.05-3.17-8.36zM12 21.2c-1.8 0-3.55-.48-5.08-1.39l-.36-.21-3.78.97.99-3.61-.22-.36a9.77 9.77 0 0 1-1.31-4.78C2.24 6.45 6.45 2.25 12 2.25c2.61 0 5.06 1.02 6.9 2.87a9.69 9.69 0 0 1 2.85 6.88C21.75 17.55 17.55 21.2 12 21.2z"/>
+        <!-- Teléfono -->
+        <path fill="#ffffff" d="M17.47 13.49c-.17-.1-1.02-.56-1.18-.62-.16-.06-.28-.1-.4.1-.12.2-.46.62-.57.75-.1.13-.21.14-.39.05-.18-.1-.76-.28-1.46-.9-.54-.47-.9-1.07-1-1.25-.11-.18-.01-.28.09-.38l.27-.33c.09-.12.12-.21.18-.34.06-.13.03-.25-.02-.36-.05-.1-.4-1.1-.55-1.5-.14-.4-.32-.34-.44-.34h-.38c-.13 0-.34.05-.52.24-.18.2-.69.63-.69 1.54 0 .91.66 1.79.75 1.91.09.12 1.56 2.32 3.77 3.25.53.22.94.35 1.25.44.53.17 1.01.14 1.39.09.43-.06 1.32-.53 1.5-1.05.18-.52.18-.95.13-1.03-.05-.09-.2-.14-.42-.25z"/>
+      </g>
     </svg>
   </a>
+
+  <script>
+    // Construye y abre el enlace correcto de WhatsApp.
+    // Prioriza wa.me con número internacional; si algo falla, usa api.whatsapp.com con el "raw".
+    (function(){
+      const btn = document.getElementById('waBtn');
+      const phoneIntl = btn.getAttribute('data-phone-intl'); // 549 + área + número (sin 0 ni 15)
+      const phoneRaw  = btn.getAttribute('data-phone-raw');  // tal cual lo pasaste (opcional)
+      const msg       = btn.getAttribute('data-msg') || '';
+
+      function enc(s){ return encodeURIComponent(s); }
+
+      function getPrimaryUrl(){
+        // wa.me recomendado por WhatsApp
+        return `https://wa.me/${phoneIntl}?text=${enc(msg)}`;
+      }
+      function getFallbackUrl(){
+        // api.whatsapp por si el anterior no abre en algunos navegadores
+        return `https://api.whatsapp.com/send?phone=${encodeURIComponent(phoneRaw || phoneIntl)}&text=${enc(msg)}`;
+      }
+
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        const primary = getPrimaryUrl();
+        // Abrimos en nueva pestaña. Si el popup es bloqueado, probamos fallback.
+        const w = window.open(primary, '_blank', 'noopener');
+        if(!w){ window.location.href = primary; }
+        // Por si algún dispositivo no entiende wa.me:
+        setTimeout(() => {
+          try{
+            if(!w || w.closed){ window.open(getFallbackUrl(), '_blank', 'noopener'); }
+          }catch(_){}
+        }, 900);
+      }, {passive:true});
+    })();
+  </script>
 </body>
 </html>
